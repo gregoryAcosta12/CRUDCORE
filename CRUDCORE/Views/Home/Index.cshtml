@@ -1,0 +1,123 @@
+﻿@model List<CRUDCORE.Models.Empleado>
+@{
+    ViewData["Title"] = "Lista de Empleados";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Lista de Empleados</h1>
+        <p>Gestión de empleados con funcionalidades para crear, editar y eliminar registros.</p>
+        <a class="btn btn-success btn-lg custom-btn" asp-action="Empleado_Detalle" asp-controller="Home" asp-route-idEmpleado="0">
+            <i class="fas fa-user-plus"></i> Crear Nuevo Empleado
+        </a>
+    </div>
+
+    <div class="card shadow custom-card">
+        <div class="card-header bg-primary text-white">
+            <h5>Empleados Registrados</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Cargo</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.NombreCompleto</td>
+                            <td>@item.Correo</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.oCargo.Descripcion</td>
+                            <td class="text-center">
+                                <a class="btn btn-primary btn-sm" asp-action="Empleado_Detalle" asp-controller="Home" asp-route-idEmpleado="@item.IdEmpleado">
+                                    <i class="fas fa-edit"></i> Editar
+                                </a>
+                                <a class="btn btn-danger btn-sm" asp-action="Eliminar" asp-controller="Home" asp-route-idEmpleado="@item.IdEmpleado" onclick="return confirm('¿Está seguro de eliminar este empleado?');">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Asegúrate de incluir Font Awesome y Bootstrap si aún no están en tu proyecto -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+    body {
+        background-image: url("https://w.wallhaven.cc/full/85/wallhaven-8586my.png");
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-size:cover;
+        background-repeat:no-repeat;
+    }
+
+    .container {
+        max-width: 900px;
+    }
+
+    .display-4 {
+        color:aliceblue
+    }
+
+    .custom-btn {
+        transition: background-color 0.3s ease;
+    }
+
+    .custom-btn:hover {
+        background-color: blue;
+    }
+
+    .custom-card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-body {
+        background-color: blueviolet;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn {
+        transition: transform 0.2s ease;
+        background-color: blue;
+
+
+
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    p{
+        color:aliceblue;
+    }
+</style>
